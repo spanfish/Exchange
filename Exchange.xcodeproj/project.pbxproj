@@ -13,7 +13,7 @@
 		BC1F640A1EFB53AD00930065 /* EXRateItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1F64091EFB53AD00930065 /* EXRateItem.m */; };
 		BC1F640E1EFB664C00930065 /* RateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1F640D1EFB664C00930065 /* RateTableViewCell.m */; };
 		BC1F64111EFB8E1A00930065 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC1F64131EFB8E1A00930065 /* Localizable.strings */; };
-		BC1F64181EFBA7F700930065 /* CurrencyUnit.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC1F64171EFBA7F700930065 /* CurrencyUnit.xib */; };
+		BC1F64181EFBA7F700930065 /* BaseCurrencyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC1F64171EFBA7F700930065 /* BaseCurrencyView.xib */; };
 		BC1F641E1EFBC8F100930065 /* EXCustomUnitBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1F641D1EFBC8F100930065 /* EXCustomUnitBarButtonItem.m */; };
 		BC2870F91EFA699F00376D10 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2870F81EFA699F00376D10 /* main.m */; };
 		BC2870FC1EFA699F00376D10 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2870FB1EFA699F00376D10 /* AppDelegate.m */; };
@@ -22,6 +22,7 @@
 		BC2871051EFA699F00376D10 /* Exchange.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC2871031EFA699F00376D10 /* Exchange.xcdatamodeld */; };
 		BC2871071EFA699F00376D10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC2871061EFA699F00376D10 /* Assets.xcassets */; };
 		BC28710A1EFA699F00376D10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC2871081EFA699F00376D10 /* LaunchScreen.storyboard */; };
+		BCAF1CBC1EFBF890008F086D /* BaseCurrencyView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCAF1CBB1EFBF890008F086D /* BaseCurrencyView.m */; };
 		BCC467821EFA6BB200B596BA /* EXMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC467811EFA6BB200B596BA /* EXMainViewController.m */; };
 		BCC467901EFA711E00B596BA /* EXViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC4678F1EFA711E00B596BA /* EXViewModel.m */; };
 /* End PBXBuildFile section */
@@ -39,7 +40,7 @@
 		BC1F64141EFB8E2300930065 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BC1F64151EFB8E5B00930065 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BC1F64161EFB8E6400930065 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		BC1F64171EFBA7F700930065 /* CurrencyUnit.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CurrencyUnit.xib; sourceTree = "<group>"; };
+		BC1F64171EFBA7F700930065 /* BaseCurrencyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseCurrencyView.xib; sourceTree = "<group>"; };
 		BC1F641C1EFBC8F100930065 /* EXCustomUnitBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXCustomUnitBarButtonItem.h; sourceTree = "<group>"; };
 		BC1F641D1EFBC8F100930065 /* EXCustomUnitBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXCustomUnitBarButtonItem.m; sourceTree = "<group>"; };
 		BC2870F41EFA699F00376D10 /* Exchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Exchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +54,8 @@
 		BC2871061EFA699F00376D10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC2871091EFA699F00376D10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BC28710B1EFA699F00376D10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BCAF1CBA1EFBF890008F086D /* BaseCurrencyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCurrencyView.h; sourceTree = "<group>"; };
+		BCAF1CBB1EFBF890008F086D /* BaseCurrencyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCurrencyView.m; sourceTree = "<group>"; };
 		BCC467801EFA6BB200B596BA /* EXMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXMainViewController.h; sourceTree = "<group>"; };
 		BCC467811EFA6BB200B596BA /* EXMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXMainViewController.m; sourceTree = "<group>"; };
 		BCC4678E1EFA711E00B596BA /* EXViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXViewModel.h; sourceTree = "<group>"; };
@@ -99,6 +102,8 @@
 				BC1F640D1EFB664C00930065 /* RateTableViewCell.m */,
 				BC1F641C1EFBC8F100930065 /* EXCustomUnitBarButtonItem.h */,
 				BC1F641D1EFBC8F100930065 /* EXCustomUnitBarButtonItem.m */,
+				BCAF1CBA1EFBF890008F086D /* BaseCurrencyView.h */,
+				BCAF1CBB1EFBF890008F086D /* BaseCurrencyView.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -147,7 +152,7 @@
 			children = (
 				BC2870F81EFA699F00376D10 /* main.m */,
 				BC1F64131EFB8E1A00930065 /* Localizable.strings */,
-				BC1F64171EFBA7F700930065 /* CurrencyUnit.xib */,
+				BC1F64171EFBA7F700930065 /* BaseCurrencyView.xib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -232,7 +237,7 @@
 				BC28710A1EFA699F00376D10 /* LaunchScreen.storyboard in Resources */,
 				BC1F64111EFB8E1A00930065 /* Localizable.strings in Resources */,
 				BC2871071EFA699F00376D10 /* Assets.xcassets in Resources */,
-				BC1F64181EFBA7F700930065 /* CurrencyUnit.xib in Resources */,
+				BC1F64181EFBA7F700930065 /* BaseCurrencyView.xib in Resources */,
 				BC2871021EFA699F00376D10 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCAF1CBC1EFBF890008F086D /* BaseCurrencyView.m in Sources */,
 				BC1F641E1EFBC8F100930065 /* EXCustomUnitBarButtonItem.m in Sources */,
 				BC1F64071EFB516900930065 /* EXParser.m in Sources */,
 				BC2871051EFA699F00376D10 /* Exchange.xcdatamodeld in Sources */,

@@ -33,14 +33,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="globe" translatesAutoresizingMaskIntoConstraints="NO" id="GwL-Ac-b4l">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GwL-Ac-b4l">
                                                     <rect key="frame" x="10" y="2" width="60" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="BGx-gI-tsw"/>
                                                         <constraint firstAttribute="height" constant="45" id="cCY-ru-qZ8"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="N/A" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="K12-7r-Kru">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" text="N/A" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="K12-7r-Kru">
                                                     <rect key="frame" x="72" y="0.0" width="146.5" height="48.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -205,7 +205,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QH1-dV-icA" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="SD0-0a-eiq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="SD0-0a-eiq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -224,7 +224,4 @@
             <point key="canvasLocation" x="-434" y="29"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="globe" width="80" height="80"/>
-    </resources>
 </document>
