@@ -10,8 +10,11 @@
 #import "EXViewModel.h"
 #import "RateTableViewCell.h"
 #import "BaseCurrencyView.h"
+#import <Masonry.h>
 
-@interface EXMainViewController ()
+@interface EXMainViewController () {
+    UIRefreshControl *refreshControl;
+}
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *oneUnitBarButtonItem;
@@ -29,7 +32,8 @@
 @property (nonatomic, strong) UILabel *lastBuildDateLabel;
 @property (nonatomic, strong) UIImageView *baseCurrencyImageView;
 
-@property (nonatomic, strong)BaseCurrencyView *baseCurrencyView;
+@property (nonatomic, strong) BaseCurrencyView *baseCurrencyView;
+@property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 @end
 
 @implementation EXMainViewController
@@ -147,8 +151,48 @@
     [self setupBaseImage:size];
 }
 
+-(void) setupIndicatorView {
+//    self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    self.indicatorView.hidesWhenStopped = NO;
+//    [self.tableView addSubview:self.indicatorView];
+//    [self.indicatorView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.tableView).insets(UIEdgeInsetsMake(-90, 0, 0, 0));
+//        make.centerX.equalTo(self.tableView);
+//    }];
+    
+    refreshControl = [[UIRefreshControl alloc] init];
+    [[refreshControl rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        NSString *baseCurrency = [[NSUserDefaults standardUserDefaults] objectForKey:@"base"];
+        [self.viewModel fetchExchangeRateWithBaseCurrency:[baseCurrency lowercaseString]];
+    }];
+    self.tableView.alwaysBounceVertical = YES;
+    [self.tableView addSubview:refreshControl];
+}
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    NSLog(@"%f", scrollView.contentOffset.y);
+//    CGFloat offset = -scrollView.contentOffset.y - 64;
+//    self.indicatorView.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI * offset/90);
+//    if(offset >= 90 && ![self.indicatorView isAnimating]) {
+//        [self.indicatorView startAnimating];
+//    }
+//}
+//
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+//    CGFloat offset = -scrollView.contentOffset.y - 64;
+//    if(offset >= 90) {
+//        [self.indicatorView startAnimating];
+//        if(![self.indicatorView isAnimating]) {
+//            [self.indicatorView startAnimating];
+//        }
+//        scrollView.contentInset = UIEdgeInsetsMake(150, 0, 0, 0);
+//    }
+//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setupIndicatorView];
     
     [self setupBaseImage: self.view.bounds.size];
     
@@ -175,7 +219,7 @@
     
     [[self.viewModel.updatedContentSignal deliverOnMainThread] subscribeNext:^(id x) {
         @strongify(self);
-        
+        [refreshControl endRefreshing];
         [self.tableView reloadData];
 #if DEBUG
         for(EXRateItem *rateItem in self.viewModel.rateArray) {
@@ -186,6 +230,7 @@
     
     [[[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:@"base"] subscribeNext:^(NSString *  _Nullable x) {
         @strongify(self);
+        [refreshControl beginRefreshing];
         NSString *baseCurrency = x == nil ? @"USD" : x;
         [self.viewModel fetchExchangeRateWithBaseCurrency:[baseCurrency lowercaseString]];
     }];

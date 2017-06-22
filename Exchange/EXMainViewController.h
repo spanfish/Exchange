@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EXMainViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface EXMainViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @end

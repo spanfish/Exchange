@@ -31,7 +31,6 @@
 }
 
 -(void) fetchExchangeRateWithBaseCurrency:(NSString *) currency {
-    ;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@.jp.fx-exchange.com/rss.xml", currency]]];
     [[NSURLConnection rac_sendAsynchronousRequest:request] subscribeNext:^(RACTwoTuple<NSHTTPURLResponse *,NSData *> * _Nullable x) {
         NSHTTPURLResponse *response = [x first];
