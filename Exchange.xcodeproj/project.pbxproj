@@ -22,6 +22,8 @@
 		BC2871051EFA699F00376D10 /* Exchange.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC2871031EFA699F00376D10 /* Exchange.xcdatamodeld */; };
 		BC2871071EFA699F00376D10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC2871061EFA699F00376D10 /* Assets.xcassets */; };
 		BC28710A1EFA699F00376D10 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC2871081EFA699F00376D10 /* LaunchScreen.storyboard */; };
+		BC2EF2A61EFCBF2700016546 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2EF2A51EFCBF2700016546 /* CoreTelephony.framework */; };
+		BC2EF2A81EFCBF2D00016546 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2EF2A71EFCBF2D00016546 /* AVFoundation.framework */; };
 		BCAF1CBC1EFBF890008F086D /* BaseCurrencyView.m in Sources */ = {isa = PBXBuildFile; fileRef = BCAF1CBB1EFBF890008F086D /* BaseCurrencyView.m */; };
 		BCC467821EFA6BB200B596BA /* EXMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC467811EFA6BB200B596BA /* EXMainViewController.m */; };
 		BCC467901EFA711E00B596BA /* EXViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BCC4678F1EFA711E00B596BA /* EXViewModel.m */; };
@@ -54,6 +56,8 @@
 		BC2871061EFA699F00376D10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC2871091EFA699F00376D10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BC28710B1EFA699F00376D10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC2EF2A51EFCBF2700016546 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		BC2EF2A71EFCBF2D00016546 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		BCAF1CBA1EFBF890008F086D /* BaseCurrencyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCurrencyView.h; sourceTree = "<group>"; };
 		BCAF1CBB1EFBF890008F086D /* BaseCurrencyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCurrencyView.m; sourceTree = "<group>"; };
 		BCC467801EFA6BB200B596BA /* EXMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXMainViewController.h; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC2EF2A81EFCBF2D00016546 /* AVFoundation.framework in Frameworks */,
+				BC2EF2A61EFCBF2700016546 /* CoreTelephony.framework in Frameworks */,
 				BC1F64031EFB511700930065 /* libxml2.tbd in Frameworks */,
 				22B07D3E87C72ADA78595598 /* libPods-Exchange.a in Frameworks */,
 			);
@@ -80,6 +86,8 @@
 		38AAA155F1FF143EB277B959 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC2EF2A71EFCBF2D00016546 /* AVFoundation.framework */,
+				BC2EF2A51EFCBF2700016546 /* CoreTelephony.framework */,
 				BC1F64021EFB511700930065 /* libxml2.tbd */,
 				E53D3DCA815E74B98BC94414 /* libPods-Exchange.a */,
 			);
@@ -204,7 +212,7 @@
 				TargetAttributes = {
 					BC2870F31EFA699F00376D10 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = S78RUL88S5;
+						DevelopmentTeam = XAU86MSXBP;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -287,7 +295,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -443,7 +451,7 @@
 			baseConfigurationReference = D1178404F6AAE34A62A10653 /* Pods-Exchange.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S78RUL88S5;
+				DEVELOPMENT_TEAM = XAU86MSXBP;
 				INFOPLIST_FILE = Exchange/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -457,7 +465,7 @@
 			baseConfigurationReference = 10EAF5AD5018F572D1745998 /* Pods-Exchange.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S78RUL88S5;
+				DEVELOPMENT_TEAM = XAU86MSXBP;
 				INFOPLIST_FILE = Exchange/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -5,6 +5,11 @@
   Created by xiangwei wang on 2017/06/22.
   Copyright © 2017 xiangwei wang. All rights reserved.
 */
+"Favorites"="Favorites";
+"All Currencies"="All Currencies";
+"Base"="Currency to calculate";
+"Delete"="Delete";
+
 "AED"="United Arab Emirates Dirham(AED)";
 "ANG"="Netherlands Antillean Guilder(ANG)";
 "ARS"="Argentine Peso(ARS)";

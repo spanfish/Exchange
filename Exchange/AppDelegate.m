@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+@import GoogleMobileAds;
 
 @interface AppDelegate ()
 
@@ -26,6 +27,10 @@
     if(unit == 0) {
         [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"unit"];
     }
+    //ca-app-pub-5834401851232277~2085158948
+    //ca-app-pub-5834401851232277/3561892147
+    //[GADMobileAds configureWithApplicationID:@"ca-app-pub-5834401851232277~7287414547"];
+    [GADMobileAds configureWithApplicationID:@"ca-app-pub-5834401851232277~7287414547"];
     return YES;
 }
 

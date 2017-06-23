@@ -5,6 +5,10 @@
   Created by xiangwei wang on 2017/06/22.
   Copyright © 2017 xiangwei wang. All rights reserved.
 */
+"Favorites"="お気に入り";
+"All Currencies"="全ての通貨";
+"Base"="換算元通貨";
+"Delete"="削除";
 "AED"="アラブ首長国連邦ディルハム(AED)";
 "ANG"="アンティルギルダー(ANG)";
 "ARS"="アルゼンチン・ペソ(ARS)";

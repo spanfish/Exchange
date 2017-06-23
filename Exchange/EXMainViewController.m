@@ -11,36 +11,43 @@
 #import "RateTableViewCell.h"
 #import "BaseCurrencyView.h"
 #import <Masonry.h>
+@import GoogleMobileAds;
 
-@interface EXMainViewController () {
+@interface EXMainViewController ()<GADBannerViewDelegate> {
     UIRefreshControl *refreshControl;
+    GADBannerView *_bannerView;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *oneUnitBarButtonItem;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *tenUnitBarButtonItem;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *hundredUnitBarButtonItem;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *thousandUnitBarButtonItem;
-@property (nonatomic, strong) IBOutlet NSLayoutConstraint *toolbarBottomConstraint;
-@property (nonatomic, strong)  UIBarButtonItem *customUnitBarButtonItem;
-@property (nonatomic, strong)  UIBarButtonItem *doneBarButtonItem;
+//bar button items
+@property (nonatomic, strong) UIBarButtonItem *oneUnitBarButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *tenUnitBarButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *hundredUnitBarButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *thousandUnitBarButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *customUnitBarButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *doneBarButtonItem;
 
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *toolbarBottomConstraint;
+@property (nonatomic, strong) IBOutlet NSLayoutConstraint *toolbarTableViewVSpaceConstraint;
+
+//custom input textfield
 @property (nonatomic, strong)  UITextField *textField;
 @property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
-
+//view model
 @property (nonatomic, strong) EXViewModel *viewModel;
-@property (nonatomic, strong) UILabel *lastBuildDateLabel;
-@property (nonatomic, strong) UIImageView *baseCurrencyImageView;
 
+@property (nonatomic, strong) UILabel *lastBuildDateLabel;
 @property (nonatomic, strong) BaseCurrencyView *baseCurrencyView;
-@property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
 @end
 
 @implementation EXMainViewController
 
 -(void) setupBaseImage:(CGSize) size {
-    self.baseCurrencyView = [[BaseCurrencyView alloc] initWithFrame:CGRectMake(0, 0, size.width, 44)];
-    self.navigationItem.titleView = self.baseCurrencyView;
+    if(self.baseCurrencyView == nil) {
+        self.baseCurrencyView = [[BaseCurrencyView alloc] init];
+        self.navigationItem.titleView = self.baseCurrencyView;
+    }
+    [self.baseCurrencyView setFrame:CGRectMake(0, 0, size.width, 44)];
 }
 
 -(void) setupToolbar:(NSInteger) mode {
@@ -49,12 +56,17 @@
         self.tenUnitBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"10" style:UIBarButtonItemStylePlain target:nil action:nil];
         self.hundredUnitBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"100" style:UIBarButtonItemStylePlain target:nil action:nil];
         self.thousandUnitBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"1000" style:UIBarButtonItemStylePlain target:nil action:nil];
-        
         self.textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
         self.textField.backgroundColor = [UIColor grayColor];
         self.textField.keyboardType = UIKeyboardTypeDecimalPad;
+        self.textField.textColor = [UIColor whiteColor];
         self.customUnitBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: self.textField];
         self.doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
+        self.oneUnitBarButtonItem.tintColor = [UIColor whiteColor];
+        self.tenUnitBarButtonItem.tintColor = [UIColor whiteColor];
+        self.hundredUnitBarButtonItem.tintColor = [UIColor whiteColor];
+        self.thousandUnitBarButtonItem.tintColor = [UIColor whiteColor];
+        self.customUnitBarButtonItem.tintColor = [UIColor whiteColor];
         
         self.oneUnitBarButtonItem.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
             [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"unit"];
@@ -96,7 +108,9 @@
         self.doneBarButtonItem.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
             [self.textField resignFirstResponder];
             double unit = [self.textField.text doubleValue];
-            [[NSUserDefaults standardUserDefaults] setDouble:unit forKey:@"unit"];
+            if(unit > 0) {
+                [[NSUserDefaults standardUserDefaults] setDouble:unit forKey:@"unit"];
+            }
             
             return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
                 [subscriber sendNext:nil];
@@ -105,6 +119,7 @@
             }];
         }];
     }
+    //show toolbar on bottom of tableview
     if(mode == 0) {
         [self.textField setFrame:CGRectMake(0, 0, 40, 40)];
         [self.toolbar setItems:@[
@@ -119,7 +134,8 @@
                                  self.customUnitBarButtonItem
                                  ] animated:NO];
     } else {
-        [self.textField setFrame:CGRectMake(0, 0, 200, 40)];
+        //show only textfield and done button
+        [self.textField setFrame:CGRectMake(0, 0, self.toolbar.bounds.size.width - 100, 40)];
         [self.toolbar setItems:@[
                                  self.customUnitBarButtonItem,
                                  [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
@@ -129,6 +145,7 @@
     
 }
 
+//listen keyboard show and hide notification
 -(void) setupKeyboard {
     [[[[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardWillShowNotification object:nil]
        map:^id _Nullable(NSNotification * _Nullable value) {
@@ -146,48 +163,73 @@
     }];
 }
 
+//handle rotation
 -(void) viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self setupBaseImage:size];
 }
 
 -(void) setupIndicatorView {
-//    self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//    self.indicatorView.hidesWhenStopped = NO;
-//    [self.tableView addSubview:self.indicatorView];
-//    [self.indicatorView mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(self.tableView).insets(UIEdgeInsetsMake(-90, 0, 0, 0));
-//        make.centerX.equalTo(self.tableView);
-//    }];
-    
-    refreshControl = [[UIRefreshControl alloc] init];
-    [[refreshControl rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UIControl * _Nullable x) {
-        NSString *baseCurrency = [[NSUserDefaults standardUserDefaults] objectForKey:@"base"];
-        [self.viewModel fetchExchangeRateWithBaseCurrency:[baseCurrency lowercaseString]];
-    }];
-    self.tableView.alwaysBounceVertical = YES;
-    [self.tableView addSubview:refreshControl];
+    if(!refreshControl) {
+        refreshControl = [[UIRefreshControl alloc] init];
+        self.tableView.alwaysBounceVertical = YES;
+        [self.tableView addSubview:refreshControl];
+        
+        [[refreshControl rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UIControl * _Nullable x) {
+            NSString *baseCurrency = [[NSUserDefaults standardUserDefaults] objectForKey:@"base"];
+            [self.viewModel fetchExchangeRateWithBaseCurrency:[baseCurrency lowercaseString]];
+        }];
+    }
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    NSLog(@"%f", scrollView.contentOffset.y);
-//    CGFloat offset = -scrollView.contentOffset.y - 64;
-//    self.indicatorView.transform = CGAffineTransformRotate(CGAffineTransformIdentity, M_PI * offset/90);
-//    if(offset >= 90 && ![self.indicatorView isAnimating]) {
-//        [self.indicatorView startAnimating];
-//    }
-//}
-//
-//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-//    CGFloat offset = -scrollView.contentOffset.y - 64;
-//    if(offset >= 90) {
-//        [self.indicatorView startAnimating];
-//        if(![self.indicatorView isAnimating]) {
-//            [self.indicatorView startAnimating];
-//        }
-//        scrollView.contentInset = UIEdgeInsetsMake(150, 0, 0, 0);
-//    }
-//}
+-(void) setupAd {
+    _bannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+    [self.view addSubview:_bannerView];
+    self.toolbarTableViewVSpaceConstraint.constant = 0;
+    [_bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(_bannerView.superview);
+        make.top.mas_equalTo(self.view.mas_bottom);
+    }];
+    _bannerView.adUnitID = @"ca-app-pub-5834401851232277/8764147742";
+    _bannerView.rootViewController = self;
+    _bannerView.delegate = self;
+    GADRequest *request = [GADRequest request];
+    request.testDevices = @[ kGADSimulatorID,                       // All simulators
+                             @"e3d8833a984532558d9da4ce773d020a" ]; // Sample device ID
+    [_bannerView loadRequest:request];
+}
+
+- (void)adViewDidReceiveAd:(GADBannerView *)bannerView {
+    NSLog(@"adViewDidReceiveAd");
+    self.toolbarTableViewVSpaceConstraint.constant = bannerView.bounds.size.height;
+    
+    [_bannerView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(_bannerView.superview);
+        make.top.mas_equalTo(self.view.mas_bottom).offset(-self.toolbar.bounds.size.height - bannerView.bounds.size.height);
+    }];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+/// Tells the delegate that an ad request failed. The failure is normally due to network
+/// connectivity or ad availablility (i.e., no fill).
+- (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error {
+    NSLog(@"didFailToReceiveAdWithError:%@", error);
+    self.toolbarTableViewVSpaceConstraint.constant = 0;
+    [_bannerView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(_bannerView.superview);
+        make.top.mas_equalTo(self.view.mas_bottom);
+    }];
+    [UIView animateWithDuration:0.2 animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -200,7 +242,7 @@
     
     [self setupKeyboard];
     
-    self.viewModel = [[EXViewModel alloc] init];
+    self.viewModel = [[EXViewModel alloc] initWithCurrency:[[NSUserDefaults standardUserDefaults] objectForKey:@"base"]];
     
     @weakify(self);
     [[[[[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:@"favorites"] skip:0] deliverOnMainThread] subscribeNext:^(NSArray *  _Nullable x) {
@@ -217,7 +259,7 @@
         [self.tableView reloadData];
     }];
     
-    [[self.viewModel.updatedContentSignal deliverOnMainThread] subscribeNext:^(id x) {
+    [[RACObserve(self.viewModel, rateArray) deliverOnMainThread] subscribeNext:^(id  _Nullable x) {
         @strongify(self);
         [refreshControl endRefreshing];
         [self.tableView reloadData];
@@ -226,14 +268,27 @@
             NSLog(@"\"%@\"=\"%@\";", rateItem.foreignCurrency, rateItem.title);
         }
 #endif
+
     }];
+//    [[self.viewModel.updatedContentSignal deliverOnMainThread] subscribeNext:^(id x) {
+//        @strongify(self);
+//        [refreshControl endRefreshing];
+//        [self.tableView reloadData];
+//#if DEBUG
+//        for(EXRateItem *rateItem in self.viewModel.rateArray) {
+//            NSLog(@"\"%@\"=\"%@\";", rateItem.foreignCurrency, rateItem.title);
+//        }
+//#endif
+//    }];
     
-    [[[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:@"base"] subscribeNext:^(NSString *  _Nullable x) {
+    [[[[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:@"base"] skip:1] subscribeNext:^(NSString *  _Nullable x) {
         @strongify(self);
         [refreshControl beginRefreshing];
         NSString *baseCurrency = x == nil ? @"USD" : x;
         [self.viewModel fetchExchangeRateWithBaseCurrency:[baseCurrency lowercaseString]];
     }];
+    
+    [self setupAd];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -320,7 +375,7 @@
         return @[action, baseAction];
     } else {
         UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive
-                                                                          title:NSLocalizedString(@"Favorite", @"Favorite")
+                                                                          title:NSLocalizedString(@"Favorites", @"Favorites")
                                                                         handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
                                                                             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                                                                             NSArray *favorites = [[NSUserDefaults standardUserDefaults] arrayForKey:@"favorites"];
@@ -341,12 +396,4 @@
         return @[action, baseAction];
     }
 }
-
-//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return UITableViewCellEditingStyleInsert;
-//}
-
-//- (nullable NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-//    return @[@"Asia", @"Europe", @"Africa", @"America", @"Oceania"];
-//}
 @end

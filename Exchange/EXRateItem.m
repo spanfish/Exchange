@@ -22,6 +22,17 @@
 - (void)clearString {
     _accum = nil;
 }
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+
+}
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if(self) {
+        
+    }
+    return self;
+}
 @end
 
 @implementation EXChannel
@@ -38,9 +49,40 @@
     self.lastBuildDate = [self.accum copy];
     [self clearString];
 }
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.lastBuildDate forKey:@"lastBuildDate"];
+}
+
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if(self) {
+        self.lastBuildDate = [aDecoder decodeObjectForKey:@"lastBuildDate"];
+    }
+    return self;
+}
 @end
 
 @implementation EXRateItem
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    //[aCoder encodeObject:self.title forKey:@"title"];
+    //[aCoder encodeObject:self.link forKey:@"link"];
+    //[aCoder encodeObject:self.desc forKey:@"desc"];
+    [aCoder encodeObject:self.baseCurrency forKey:@"baseCurrency"];
+    [aCoder encodeObject:self.foreignCurrency forKey:@"foreignCurrency"];
+    [aCoder encodeDouble:self.exchangeRate forKey:@"exchangeRate"];
+}
+
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if(self) {
+        self.baseCurrency = [aDecoder decodeObjectForKey:@"baseCurrency"];
+        self.foreignCurrency = [aDecoder decodeObjectForKey:@"foreignCurrency"];
+        self.exchangeRate = [aDecoder decodeDoubleForKey:@"exchangeRate"];
+    }
+    return self;
+}
+
 - (BOOL)canAddString {
     return flags.inDesc || flags.inLink || flags.inTitle;
 }

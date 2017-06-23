@@ -9,4 +9,5 @@ target 'Exchange' do
   pod 'ReactiveObjC', '3.0.0'
   #pod 'ReactiveViewModel'
   pod 'Masonry'
+  pod 'Google-Mobile-Ads-SDK'
 end

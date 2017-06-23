@@ -17,7 +17,7 @@
 
 @implementation EXViewModel
 
--(instancetype) init {
+-(instancetype) initWithCurrency:(NSString *) currency {
     self = [super init];
     if(self) {
         _updatedContentSignal = [[RACSubject subject] setNameWithFormat:@"EXViewModel updatedContentSignal"];
@@ -26,6 +26,12 @@
             unit = 1;
         }
         self.unit = unit;
+        
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+        if([[NSFileManager defaultManager] fileExistsAtPath:[path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data", [currency uppercaseString]]]]) {
+            NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithFile:[path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data", [currency uppercaseString]]]];
+            self.rateArray = array;
+        }
     }
     return self;
 }
@@ -39,7 +45,17 @@
             _parser = [[EXParser alloc] initWithFeed:feed];
             
             [[_parser parseKML] subscribeNext:^(RACTwoTuple<EXChannel *, NSArray *> *  _Nullable m) {
-                self.rateArray = [m second];
+                NSArray *array = [m second];
+                
+                if([array count] > 0) {
+                    self.rateArray = array;
+                    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+                    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.rateArray];
+                    BOOL result = [data writeToFile:[path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.data", [currency uppercaseString]]] atomically:YES];
+                    if(result) {
+                        
+                    }
+                }
                 [_updatedContentSignal sendNext:nil];
             }];
         }

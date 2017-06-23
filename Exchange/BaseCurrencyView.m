@@ -17,7 +17,6 @@
         UIView *view = [[[UINib nibWithNibName:@"BaseCurrencyView" bundle:nil] instantiateWithOwner:self options:nil] firstObject];
         [self addSubview:view];
 
-        @weakify(self);
         RACChannelTerminal *single = [[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:@"unit"];
         [[[single combineLatestWith:[[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:@"base"]]
          deliverOnMainThread]

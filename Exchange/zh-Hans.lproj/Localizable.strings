@@ -5,6 +5,11 @@
   Created by xiangwei wang on 2017/06/22.
   Copyright © 2017 xiangwei wang. All rights reserved.
 */
+"Favorites"="常用货币";
+"All Currencies"="所有货币";
+"Base"="基准货币";
+"Delete"="删除";
+
 "AED"="阿联酋迪拉姆(AED)";
 "ANG"="荷属安的列斯盾(ANG)";
 "ARS"="阿根廷比索(ARS)";

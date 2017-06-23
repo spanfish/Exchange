@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface EXElement : NSObject
+@interface EXElement : NSObject<NSCoding>
 @property(nonatomic, strong) NSMutableString *accum;
 @property(nonatomic, assign, readonly) BOOL canAddString;
 

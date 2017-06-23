@@ -119,13 +119,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZlD-VW-AKx"/>
                     <connections>
-                        <outlet property="hundredUnitBarButtonItem" destination="i2k-Xg-rT2" id="m3h-R6-x1Z"/>
-                        <outlet property="oneUnitBarButtonItem" destination="1bU-4b-MZ9" id="iEa-8g-Wdx"/>
                         <outlet property="tableView" destination="4c5-m5-n1v" id="zyX-94-8Px"/>
-                        <outlet property="tenUnitBarButtonItem" destination="nOz-26-BBn" id="8zc-YM-dJ8"/>
-                        <outlet property="thousandUnitBarButtonItem" destination="rvG-BJ-7yh" id="Mn2-l5-89o"/>
                         <outlet property="toolbar" destination="6Na-bo-42u" id="JqE-IV-5pr"/>
-                        <outlet property="toolbarBottomConstraint" destination="oHJ-CB-y1H" id="bxt-fr-Hhz"/>
+                        <outlet property="toolbarBottomConstraint" destination="oHJ-CB-y1H" id="uDR-ay-pOy"/>
+                        <outlet property="toolbarTableViewVSpaceConstraint" destination="bIG-s8-mXa" id="os5-JF-PI5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

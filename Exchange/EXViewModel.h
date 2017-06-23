@@ -17,5 +17,5 @@
 @property(nonatomic, assign) NSUInteger unit;
 
 -(void) fetchExchangeRateWithBaseCurrency:(NSString *) currency;
-
+-(instancetype) initWithCurrency:(NSString *) currency;
 @end
