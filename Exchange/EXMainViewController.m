@@ -271,7 +271,7 @@
 
     }];
     
-    [[[[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:@"base"] skip:1] subscribeNext:^(NSString *  _Nullable x) {
+    [[[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:@"base"] subscribeNext:^(NSString *  _Nullable x) {
         @strongify(self);
         [refreshControl beginRefreshing];
         NSString *baseCurrency = x == nil ? @"USD" : x;
