@@ -188,7 +188,7 @@
     self.toolbarTableViewVSpaceConstraint.constant = 0;
     [_bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(_bannerView.superview);
-        make.top.mas_equalTo(self.view.mas_bottom);
+        make.bottom.mas_equalTo(self.toolbar.mas_top).offset(-self.toolbar.bounds.size.height - _bannerView.bounds.size.height);
     }];
     _bannerView.adUnitID = @"ca-app-pub-5834401851232277/8764147742";
     _bannerView.rootViewController = self;
@@ -205,7 +205,7 @@
     
     [_bannerView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(_bannerView.superview);
-        make.top.mas_equalTo(self.view.mas_bottom).offset(-self.toolbar.bounds.size.height - bannerView.bounds.size.height);
+        make.bottom.mas_equalTo(self.toolbar.mas_top).offset(0);
     }];
     
     [UIView animateWithDuration:0.2 animations:^{
@@ -222,7 +222,7 @@
     self.toolbarTableViewVSpaceConstraint.constant = 0;
     [_bannerView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(_bannerView.superview);
-        make.top.mas_equalTo(self.view.mas_bottom);
+        make.bottom.mas_equalTo(self.toolbar.mas_top).offset(-self.toolbar.bounds.size.height - _bannerView.bounds.size.height);
     }];
     [UIView animateWithDuration:0.2 animations:^{
         [self.view layoutIfNeeded];
@@ -270,16 +270,6 @@
 #endif
 
     }];
-//    [[self.viewModel.updatedContentSignal deliverOnMainThread] subscribeNext:^(id x) {
-//        @strongify(self);
-//        [refreshControl endRefreshing];
-//        [self.tableView reloadData];
-//#if DEBUG
-//        for(EXRateItem *rateItem in self.viewModel.rateArray) {
-//            NSLog(@"\"%@\"=\"%@\";", rateItem.foreignCurrency, rateItem.title);
-//        }
-//#endif
-//    }];
     
     [[[[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:@"base"] skip:1] subscribeNext:^(NSString *  _Nullable x) {
         @strongify(self);
