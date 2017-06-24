@@ -45,7 +45,7 @@
              [numberFormatter setMaximumFractionDigits:3];
              
              [numberFormatter setCurrencySymbol:@""];
-             self.unitLabel.text = [numberFormatter stringFromNumber:[x first]];
+             self.unitLabel.text = [NSString stringWithFormat:@"%@", [numberFormatter stringFromNumber:[x first]]];
         }];
         
 //        [[[[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:@"base"] deliverOnMainThread] subscribeNext:^(id  _Nullable x) {

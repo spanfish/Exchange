@@ -17,7 +17,6 @@
 		BC1F641E1EFBC8F100930065 /* EXCustomUnitBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1F641D1EFBC8F100930065 /* EXCustomUnitBarButtonItem.m */; };
 		BC2870F91EFA699F00376D10 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2870F81EFA699F00376D10 /* main.m */; };
 		BC2870FC1EFA699F00376D10 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2870FB1EFA699F00376D10 /* AppDelegate.m */; };
-		BC2870FF1EFA699F00376D10 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2870FE1EFA699F00376D10 /* ViewController.m */; };
 		BC2871021EFA699F00376D10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC2871001EFA699F00376D10 /* Main.storyboard */; };
 		BC2871051EFA699F00376D10 /* Exchange.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC2871031EFA699F00376D10 /* Exchange.xcdatamodeld */; };
 		BC2871071EFA699F00376D10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC2871061EFA699F00376D10 /* Assets.xcassets */; };
@@ -49,8 +48,6 @@
 		BC2870F81EFA699F00376D10 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BC2870FA1EFA699F00376D10 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BC2870FB1EFA699F00376D10 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		BC2870FD1EFA699F00376D10 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		BC2870FE1EFA699F00376D10 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		BC2871011EFA699F00376D10 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BC2871041EFA699F00376D10 /* Exchange.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Exchange.xcdatamodel; sourceTree = "<group>"; };
 		BC2871061EFA699F00376D10 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -141,8 +138,6 @@
 				BCC4678D1EFA710D00B596BA /* View Models */,
 				BC2870FA1EFA699F00376D10 /* AppDelegate.h */,
 				BC2870FB1EFA699F00376D10 /* AppDelegate.m */,
-				BC2870FD1EFA699F00376D10 /* ViewController.h */,
-				BC2870FE1EFA699F00376D10 /* ViewController.m */,
 				BCC467801EFA6BB200B596BA /* EXMainViewController.h */,
 				BCC467811EFA6BB200B596BA /* EXMainViewController.m */,
 				BC2871001EFA699F00376D10 /* Main.storyboard */,
@@ -311,7 +306,6 @@
 				BC2871051EFA699F00376D10 /* Exchange.xcdatamodeld in Sources */,
 				BC1F640E1EFB664C00930065 /* RateTableViewCell.m in Sources */,
 				BCC467901EFA711E00B596BA /* EXViewModel.m in Sources */,
-				BC2870FF1EFA699F00376D10 /* ViewController.m in Sources */,
 				BC2870FC1EFA699F00376D10 /* AppDelegate.m in Sources */,
 				BCC467821EFA6BB200B596BA /* EXMainViewController.m in Sources */,
 				BC2870F91EFA699F00376D10 /* main.m in Sources */,

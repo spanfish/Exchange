@@ -195,6 +195,7 @@
     _bannerView.delegate = self;
     GADRequest *request = [GADRequest request];
     request.testDevices = @[ kGADSimulatorID,                       // All simulators
+                             @"eab2b9e5d7392963581775724be92d80", //iPad
                              @"e3d8833a984532558d9da4ce773d020a" ]; // Sample device ID
     [_bannerView loadRequest:request];
 }
@@ -386,4 +387,15 @@
         return @[action, baseAction];
     }
 }
+
+// return list of section titles to display in section index view (e.g. "ABCD...Z#")
+//- (nullable NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+//    
+//}
+
+// tell table which section corresponds to section title/index (e.g. "B",1))
+//- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+//    
+//}
+
 @end
